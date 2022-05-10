@@ -26,7 +26,7 @@ app.layout = layout
     [Input('original-image', 'src'),
     Input('passage_dropdown_architecture', 'value'),
     Input('passage_dropdown_dataset', 'value'),
-    Input('passage_dropdown_style', 'value')])
+    Input('passage_dropdown_style', 'value')]
 )
 def update_processed_image(contents, architecture, dataset, style):
     if contents:
