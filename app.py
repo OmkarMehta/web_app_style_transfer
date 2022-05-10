@@ -6,6 +6,7 @@ from flask_caching import Cache
 import flask
 from flask import request
 import re
+import os
 from layout import layout
 # from mobile_layout import _apply_mobile_layout
 
@@ -19,5 +20,12 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
                 meta_tags=[{'name': 'viewport',
                             'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.8, minimum-scale=0.5,'}]
                 )
-cache = Cache(app.server)
+
+
+
+cache = Cache(app.server, config={
+    'CACHE_TYPE': 'filesystem',
+    'CACHE_DIR': 'cache-directory'
+})
+app.config.suppress_callback_exceptions = True
 app.title = "Style Transfer"

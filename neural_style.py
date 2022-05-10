@@ -23,8 +23,9 @@ from torchvision import transforms
 # import style_transfer.utils as utils
 # from style_transfer.transformer_net import TransformerNet
 # from style_transfer.vgg import Vgg16
-PRESERVE_COLOR = True
+PRESERVE_COLOR = False
 def stylize(image, model_path):
+    print('model_path:', model_path)
     
     image_content = image
     
@@ -42,9 +43,11 @@ def stylize(image, model_path):
     #     transforms.ToTensor(),
     #     transforms.Lambda(lambda x: x.mul(255))
     # ])
-    if "vgg" in model_path:
+    if "vgg" in model_path.lower():
+        # print('It is a vgg model')
         style_model = VGG16()
     else:
+        # print('It is a custom model')
         style_model = CustomModel()
     
     # content_image = content_transform(content_image).unsqueeze(0).to(device)
@@ -52,7 +55,9 @@ def stylize(image, model_path):
     with torch.no_grad():
         torch.cuda.empty_cache()
         content_image = utils.load_image(image_content)
-        content_tensor = utils.itot(content_image).to(device)
+        print(content_image.shape)
+        print(content_image.dtype)
+        content_tensor = utils.itot(content_image, 512).to(device)
         # state_dict = torch.load(model_path)
                 
         style_model.load_state_dict(torch.load(model_path))
@@ -64,15 +69,16 @@ def stylize(image, model_path):
         if PRESERVE_COLOR:
             output_image = utils.transfer_color(content_image, output_image)
 
-        # convert output_image to base64
-        output_image = base64.b64encode(output_image)
+            output_tensor = utils.itot(output_image, 512)
+        # # convert output_image to base64
+        # output_image = base64.b64encode(output_image)
         
         # image = saveimg(output)
-        image = utils.saveimg(output_image, "output.jpg")
-        image = utils.load_image_base64("output.jpg")
-        image_tensor = utils.itot(image)
+        output_image = utils.saveimg(output_image, "output.jpg")
+        output_image = utils.load_image_base64("output.jpg")
+        output_tensor = utils.itot(output_image, 512)
         # convert image to base64
-        image_b64 = utils.save_image_base64(image_tensor[0])
+        image_b64 = utils.save_image_base64(output_tensor[0])
     
     return image_b64
 

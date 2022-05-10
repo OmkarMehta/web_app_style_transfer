@@ -5,6 +5,9 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from torchvision import transforms, datasets
+import base64
+from io import BytesIO
+
 
 # def load_image(filename, size=None, scale=None):
 #     img = Image.open(filename).convert('RGB') # convert to RGB
@@ -13,11 +16,27 @@ from torchvision import transforms, datasets
 #     elif scale is not None:
 #         img = img.resize((int(img.size[0] / scale), int(img.size[1] / scale)), Image.ANTIALIAS) # rescale the image
 #     return img
+def load_image_base64(path):
+    img = cv2.imread(path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    return img
 
+def save_image_base64(data):
+    img = data.clone().clamp(0, 255).numpy()
+    img = img.transpose(1, 2, 0).astype("uint8")
+    img = Image.fromarray(img)
+
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    img_str = base64.b64encode(buffered.getvalue())
+
+    return img_str
 # Load image file
 def load_image(path):
     # Images loaded as BGR
-    image = cv2.imread(path)
+    nparr = np.fromstring(base64.b64decode(path), np.uint8)
+    image = cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED)
+    # image = cv2.imread(path)
     return image
 
 # Show image

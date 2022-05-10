@@ -30,6 +30,7 @@ app.layout = layout
 )
 def update_processed_image(contents, architecture, dataset, style):
     if contents:
+        # print(contents)
         content_type, content_string = contents.split(',')
         processed_image_string = callbacks.stylize_image(content_string, architecture, dataset, style).decode("utf-8")
         processed_image_string = 'data:image/png;base64,{}'.format(processed_image_string)
