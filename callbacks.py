@@ -30,6 +30,6 @@ map_style_model_path = {'vgg16_coco_rain_princess': 'models/VGG16/COCO/rain_prin
                          }
 def stylize_image(input_image_b64_str, architecture="custom", dataset="coco", style="udnie"):
     model_string = architecture + "_" + dataset + "_" + style
-    model_path=map_style_model_path.get(model_string)
-    image_str = neural_style.stylize(input_image_b64_str, model=model_path)
+    model_path = map_style_model_path.get(model_string)
+    image_str = neural_style.stylize(input_image_b64_str, model_path=model_path)
     return image_str

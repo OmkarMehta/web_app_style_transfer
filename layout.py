@@ -91,23 +91,23 @@ style_dropdown = dbc.Row(
                 html.P(html.B("Select an architecture")),
                 dcc.Dropdown(
                     id='passage_dropdown_architecture',
-                    options=[{'label':key, 'value' : key} for key in {"Custom": "custom", "VGG16": "vgg16"}],
+                    options=[{'label':key, 'value' : value} for key, value in ({"Custom": "custom", "VGG16": "vgg16"}).items()],
                     placeholder = 'Architecture',
-                    value='Custom'
+                    value='custom'
             ), 
             html.P(html.B("Select a dataset")),
             dcc.Dropdown(
                     id='passage_dropdown_dataset',
-                    options=[{'label':key, 'value' : key} for key in {"COCO": "coco", "Tiny ImageNet": "tiny_imagenet"}],
+                    options=[{'label':key, 'value' : value} for key, value in ({"COCO": "coco", "Tiny ImageNet": "tiny_imagenet"}).items()],
                     placeholder = 'Dataset',
-                    value='COCO'
+                    value='coco'
             ),
             html.P(html.B("Select a style")),
             dcc.Dropdown(
                     id='passage_dropdown_style',
-                    options=[{'label':key, 'value' : key} for key in {"Rain Princess": "rain_princess", "The Scream": "the_scream", "The Shipwreck": "the_shipwreck", "Udnie": "udnie", "Wave": "wave"}],
+                    options=[{'label':key, 'value' : value} for key, value in ({"Rain Princess": "rain_princess", "The Scream": "the_scream", "The Shipwreck": "the_shipwreck", "Udnie": "udnie", "Wave": "wave"}).items()],
                     placeholder = 'Style',
-                    value='Udnie'
+                    value='udnie'
             )
             ]
         )

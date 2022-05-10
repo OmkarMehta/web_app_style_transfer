@@ -26,7 +26,7 @@ from torchvision import transforms
 PRESERVE_COLOR = True
 def stylize(image, model_path):
     
-    _, image_content = image.split(',')
+    image_content = image
     
     device = torch.device("cpu")
 
