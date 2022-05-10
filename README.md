@@ -1,1 +1,8 @@
-# web_app_style_transfer
+# Style Transfer with Fast Dash!
+
+
+[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
+
+### Authors
+Anurag Anand <br>
+Omkar Mehta
