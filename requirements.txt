@@ -1,6 +1,6 @@
 Flask==1.1.1
-gunicorn==20.0.4
-numpy==1.17.4
+gunicorn
+numpy
 dash==1.13.4
 dash_bootstrap_components==0.10.3
 flask_caching==1.9.0
@@ -10,4 +10,3 @@ requests==2.24.0
 matplotlib
 Pillow==9.0.1
 opencv-python==4.5.5.64
-fast-dash==0.1.5
