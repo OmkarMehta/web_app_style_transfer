@@ -14,6 +14,22 @@ encoded_image = base64.b64encode(open(image_filename, 'rb').read()).decode("utf-
 image_filename = 'assets/defaultimage.jpeg' # default image
 encoded_image_default = base64.b64encode(open(image_filename, 'rb').read()).decode("utf-8")
 
+rain_princess_filename = 'assets/rain_princess.jpg' # rain princess image
+encoded_rain_princess = base64.b64encode(open(rain_princess_filename, 'rb').read()).decode("utf-8")
+
+the_scream_filename = 'assets/the_scream.jpg' # the scream image
+encoded_the_scream = base64.b64encode(open(the_scream_filename, 'rb').read()).decode("utf-8")
+
+the_shipwreck_filename = 'assets/the_shipwreck.jpg' # the shipwreck image
+encoded_the_shipwreck = base64.b64encode(open(the_shipwreck_filename, 'rb').read()).decode("utf-8")
+
+udnie_filename = 'assets/udnie.jpg' # udnie image
+encoded_udnie = base64.b64encode(open(udnie_filename, 'rb').read()).decode("utf-8")
+
+wave_filename = 'assets/wave.jpg' # wave image
+encoded_wave = base64.b64encode(open(wave_filename, 'rb').read()).decode("utf-8")
+
+
 # 1. Navbar placeholder (currently black row)
 navbar = dbc.Row()
 
@@ -23,6 +39,9 @@ icon_image = dbc.Row(
                     style={'width':'178px', 'margin-top': "5%"}),
                     justify='center'
 )
+
+meme_filename = 'assets/meme.jpeg' # meme image
+encoded_meme = base64.b64encode(open(meme_filename, 'rb').read()).decode("utf-8")
 
 
 ### 3. Body title
@@ -50,6 +69,34 @@ body_paragraph = dbc.Row(
                )
     ],
     style = {'text-align':'center', "padding":"1% 1% 1% 0%", "background-color":theme_color_code}
+)
+
+### 3.1. dbc row for rain princess image, the scream image, the shipwreck image, udnie image, wave image in one row
+body_images = dbc.Row(
+    [dbc.Col(
+        [html.Img(src='data:image/png;base64,{}'.format(encoded_rain_princess),
+                style={'width':'100%', 'margin-top': "1%"}),]),
+    dbc.Col(
+        [html.Img(src='data:image/png;base64,{}'.format(encoded_the_scream),
+                style={'width':'100%', 'margin-top': "1%"}),]),
+    dbc.Col(
+        [html.Img(src='data:image/png;base64,{}'.format(encoded_the_shipwreck),
+                style={'width':'100%', 'margin-top': "1%"}),]),
+    dbc.Col(
+        [html.Img(src='data:image/png;base64,{}'.format(encoded_udnie),             
+                style={'width':'100%', 'margin-top': "1%"}),]),
+    dbc.Col(
+        [html.Img(src='data:image/png;base64,{}'.format(encoded_wave),
+                style={'width':'100%', 'margin-top': "1%"}),]),]
+    ,style ={"padding":"1% 1% 1% 0%", "background-color":theme_color_code}
+)
+
+
+### 3.2. Meme image placeholder
+meme_image = dbc.Row(
+    html.Img(src='data:image/png;base64,{}'.format(encoded_meme),
+    style={'width':'50%', 'margin-top': "10%"}),
+    justify='center'
 )
 
 ### 4. Github logo
@@ -164,6 +211,8 @@ top = dbc.Container(
         navbar,
         icon_image,
         body_paragraph,
+        body_images,
+        meme_image,
         github_logo
     ],
     fluid = False
